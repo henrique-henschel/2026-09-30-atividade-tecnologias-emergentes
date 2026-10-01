@@ -1,0 +1,18 @@
+$pastaSite = (Resolve-Path .\site).Path
+docker run -d --name docker-a -p 127.0.0.1:8082:80 --mount "type=bind,source=$pastaSite,target=/usr/share/nginx/html,readonly" nginx:alpine
+
+---
+
+$pastaSite = (Resolve-Path .\site).Path
+docker run -d --name docker-a -p 127.0.0.1:8092:80 --mount "type=bind,source=$pastaSite,target=/usr/share/nginx/html,readonly" nginx:alpine
+
+---
+
+PS C:\Users\Unicesumar\Desktop\turma-a> docker stop docker-a
+docker-a
+PS C:\Users\Unicesumar\Desktop\turma-a> docker inspect --format '{{.State.Status}}' docker-a
+exited
+PS C:\Users\Unicesumar\Desktop\turma-a> docker ps -a --filter name=docker-a
+CONTAINER ID   IMAGE          COMMAND                  CREATED         STATUS                      PORTS     NAMES
+4360bed723b2   nginx:alpine   "/docker-entrypoint.…"   2 minutes ago   Exited (0) 32 seconds ago             docker-a
+PS C:\Users\Unicesumar\Desktop\turma-a>_
